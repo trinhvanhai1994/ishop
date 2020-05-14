@@ -1,7 +1,7 @@
 package com.ominext.cms.service;
 
 import com.ominext.cms.exception.RecordNotFoundException;
-import com.ominext.cms.model.EmployeeEntity;
+import com.ominext.cms.model.Employee;
 import com.ominext.cms.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,24 +17,24 @@ public class EmployeeService {
         this.repository = repository;
     }
 
-    public List<EmployeeEntity> getAllEmployees() {
-        return (List<EmployeeEntity>) repository.findAll();
+    public List<Employee> getAllEmployees() {
+        return (List<Employee>) repository.findAll();
     }
 
-    public EmployeeEntity getEmployeeById(Long id) throws RecordNotFoundException {
-        Optional<EmployeeEntity> employee = repository.findById(id);
+    public Employee getEmployeeById(Long id) throws RecordNotFoundException {
+        Optional<Employee> employee = repository.findById(id);
         if (!employee.isPresent()) {
 			throw new RecordNotFoundException("No employee record exist for given id");
 		}
         return employee.get();
     }
 
-    public void createOrUpdateEmployee(EmployeeEntity entity) {
-        Optional<EmployeeEntity> employee = repository.findById(entity.getId());
+    public void createOrUpdateEmployee(Employee entity) {
+        Optional<Employee> employee = repository.findById(entity.getId());
         if (!employee.isPresent()) {
             repository.save(entity);
         } else {
-            EmployeeEntity newEntity = employee.get();
+            Employee newEntity = employee.get();
             newEntity.setEmail(entity.getEmail());
             newEntity.setFirstName(entity.getFirstName());
             newEntity.setLastName(entity.getLastName());
@@ -43,7 +43,7 @@ public class EmployeeService {
     }
 
     public void deleteEmployeeById(Long id) throws RecordNotFoundException {
-        Optional<EmployeeEntity> employee = repository.findById(id);
+        Optional<Employee> employee = repository.findById(id);
         if (!employee.isPresent()) {
             throw new RecordNotFoundException("No employee record exist for given id");
         }
