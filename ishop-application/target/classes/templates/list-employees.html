@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Employees</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+    <form th:action="@{/logout}" method="GET">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Logout
+        </button>
+    </form>
+
+    <div class="container my-2">
+    <div class="card">
+    <div class="card-body">
+        <div th:switch="${employees}" class="container my-5">
+            <p th:object="${user}" th:if="${user.getRoles().iterator().next().getRole() == 'ADMIN'}" class="my-5">
+                <a href="/redirectCreateEmployee" class="btn btn-primary">
+                <i class="fas fa-user-plus ml-2"> Add Employee </i></a>
+            </p>
+            <div class="col-md-10">
+                <h2 th:case="null">No record found !!</h2>
+                <div th:case="*">
+                    <table class="table table-striped table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th th:object="${user}" th:if="${user.getRoles().iterator().next().getRole() == 'ADMIN'}">
+                                    Edit</th>
+                                <th th:object="${user}" th:if="${user.getRoles().iterator().next().getRole() == 'ADMIN'}">
+                                    Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="employee : ${employees}">
+                                <td th:text="${employee.firstName}"></td>
+                                <td th:text="${employee.lastName}"></td>
+                                <td th:text="${employee.email}"></td>
+                                <td th:object="${user}" th:if="${user.getRoles().iterator().next().getRole() == 'ADMIN'}">
+                                    <form th:action="@{/edit/{id}(id=${employee.id})}" method="POST" id = "editForm" >
+                                        <a href="#" onclick="document.getElementById('editForm').submit()" class="btn btn-primary">
+                                            <i class="fas fa-user-edit ml-2"></i>
+                                        </a>
+                                    </form>
+                                </td>
+                                <td th:object="${user}" th:if="${user.getRoles().iterator().next().getRole() == 'ADMIN'}">
+                                    <form th:action="@{/delete/{id}(id=${employee.id})}" method="POST" id = "deleteForm" >
+                                        <a href="#" onclick="document.getElementById('deleteForm').submit()" class="btn btn-primary">
+                                            <i class="fas fa-user-times ml-2"></i>
+                                        </a>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
