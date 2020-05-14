@@ -3,7 +3,6 @@ package com.ominext.cms.web;
 import java.util.List;
 
 import com.ominext.cms.exception.RecordNotFoundException;
-import com.ominext.cms.model.Role;
 import com.ominext.cms.model.User;
 import com.ominext.cms.service.EmployeeService;
 import com.ominext.cms.service.UserService;
@@ -16,23 +15,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ominext.cms.model.EmployeeEntity;
+import com.ominext.cms.model.Employee;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class EmployeeMvcController {
+public class EmployeeController {
 	private final EmployeeService service;
 	private final UserService userService;
 
-	public EmployeeMvcController(EmployeeService service, UserService userService) {
+	public EmployeeController(EmployeeService service, UserService userService) {
 		this.service = service;
 		this.userService = userService;
 	}
 
 	@GetMapping("/employees")
 	public ModelAndView getAllEmployees() {
-		List<EmployeeEntity> list = service.getAllEmployees();
+		List<Employee> list = service.getAllEmployees();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
 		ModelAndView modelAndView = new ModelAndView();
@@ -44,26 +43,23 @@ public class EmployeeMvcController {
 
 	@PostMapping("/edit/{id}")
 	public ModelAndView editEmployeeById(@PathVariable Long id) throws RecordNotFoundException {
-		System.out.println(id);
 		ModelAndView modelAndView = new ModelAndView();
-		if (id != null) {
-			EmployeeEntity entity = service.getEmployeeById(id);
-			modelAndView.addObject("employee", entity);
-			modelAndView.setViewName("add-edit-employee");
-		}
+		Employee entity = service.getEmployeeById(id);
+		modelAndView.addObject("employee", entity);
+		modelAndView.setViewName("add-edit-employee");
 		return modelAndView;
 	}
 
 	@GetMapping("/redirectCreateEmployee")
 	public ModelAndView createEmployee(Model model) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("employee", new EmployeeEntity());
+		modelAndView.addObject("employee", new Employee());
 		modelAndView.setViewName("add-edit-employee");
 		return modelAndView;
 	}
 
 	@PostMapping("/createEmployee")
-	public ModelAndView createOrUpdateEmployee(EmployeeEntity employee) {
+	public ModelAndView createOrUpdateEmployee(Employee employee) {
 		service.createOrUpdateEmployee(employee);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/employees");

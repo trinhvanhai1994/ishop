@@ -2,22 +2,22 @@ package com.ominext.cms.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import java.sql.Timestamp;
 
-@Entity
-@Table(name="employees")
 @Data
-public class EmployeeEntity {
-
+@Entity
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String name;
+    private Double price;
+    private String image;
+    private Float discount;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 }
