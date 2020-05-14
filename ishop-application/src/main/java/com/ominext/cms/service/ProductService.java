@@ -19,6 +19,7 @@ public class ProductService {
     }
 
     public void save(Product product) {
+        product.setCreatedAt(DateUtils.currentTimestamp());
         repository.save(product);
     }
 

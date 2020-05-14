@@ -35,17 +35,11 @@ public class ProductController {
     }
 
     @PostMapping("/create-product")
-    public ModelAndView createProduct(Product product) throws RecordNotFoundException {
-
-        Product productLocal = service.get(product.getId());
-        if (productLocal != null) {
-            service.update(product.getId(), product);
-        } else {
-            service.save(product);
-        }
+    public ModelAndView createProduct(Product product) {
+        service.save(product);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("product", productLocal);
-        modelAndView.setViewName("product/add-edit-product");
+        modelAndView.addObject("product", product);
+        modelAndView.setViewName("product/detail-product");
         return modelAndView;
     }
 
