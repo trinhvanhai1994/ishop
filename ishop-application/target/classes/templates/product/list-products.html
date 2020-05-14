@@ -48,14 +48,22 @@
                                 <td th:text="${product.price}"></td>
                                 <td th:text="${product.discount}"></td>
                                 <td th:object="${user}" th:if="${user.getRoles().iterator().next().getRole() == 'ADMIN'}">
+<<<<<<< HEAD
                                     <form th:action="@{/edit-product/{id}(id=${product.id})}" method="POST" id = "editForm" >
+=======
+                                    <form th:action="@{/edit/{id}(id=${product.id})}" method="POST" id = "editForm" >
+>>>>>>> 1ddbf6678b4bbc890820f1ce5f0d8e3e432b8e46
                                         <a href="#" onclick="document.getElementById('editForm').submit()" class="btn btn-primary">
                                             <i class="fas fa-user-edit ml-2"></i>
                                         </a>
                                     </form>
                                 </td>
                                 <td th:object="${user}" th:if="${user.getRoles().iterator().next().getRole() == 'ADMIN'}">
+<<<<<<< HEAD
                                     <form th:action="@{/delete-product/{id}(id=${product.id})}" method="POST" id = "deleteForm" >
+=======
+                                    <form th:action="@{/delete/{id}(id=${product.id})}" method="POST" id = "deleteForm" >
+>>>>>>> 1ddbf6678b4bbc890820f1ce5f0d8e3e432b8e46
                                         <a href="#" onclick="document.getElementById('deleteForm').submit()" class="btn btn-primary">
                                             <i class="fas fa-user-times ml-2"></i>
                                         </a>

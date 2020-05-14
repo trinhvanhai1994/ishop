@@ -60,7 +60,6 @@ public class EmployeeController {
 
 	@PostMapping("/createEmployee")
 	public ModelAndView createOrUpdateEmployee(Employee employee) {
-		System.out.println(employee);
 		service.createOrUpdateEmployee(employee);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/employees");
