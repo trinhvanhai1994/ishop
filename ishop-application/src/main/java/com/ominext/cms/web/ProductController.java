@@ -39,7 +39,7 @@ public class ProductController {
         service.save(product);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("product", product);
-        modelAndView.setViewName("product/detail-product");
+        modelAndView.setViewName("redirect:/products");
         return modelAndView;
     }
 
@@ -47,7 +47,7 @@ public class ProductController {
     public ModelAndView getProduct(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("product", new Product());
-        modelAndView.setViewName("product/add-edit-product");
+        modelAndView.setViewName("/product/detail-product");
         return modelAndView;
     }
 
@@ -56,7 +56,7 @@ public class ProductController {
         Product product = service.get(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("product", product);
-        modelAndView.setViewName("product/add-edit-product");
+        modelAndView.setViewName("redirect:/products");
         return modelAndView;
     }
 
