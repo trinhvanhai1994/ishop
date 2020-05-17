@@ -1,0 +1,69 @@
+body{
+    background: url('http://phucgroup.vn/profiles/phucgroupvn/uploads/attach/1455617082_services4.jpg');
+    font-family: 'Oxygen', sans-serif;
+    color: #fff !important;
+}
+p {
+    margin: 0 !important;
+}
+.main{
+    margin-top: 25px;
+}
+
+.title {
+    font-size: 50px;
+    font-family: 'Passion One', cursive;
+    font-weight: 400;
+    color: #fff;
+}
+
+hr{
+    width: 10%;
+    color: #000;
+}
+
+.form-group{
+    margin-bottom: 15px;
+}
+
+label{
+    margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 13px;
+    padding-top: 3px;
+}
+
+.main-login{
+    background-color: #00000080;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.main-center{
+    margin: 0 auto;
+    max-width: 450px;
+    padding: 40px 40px;
+
+}
+
+.login-button{
+    margin-top: 15px;
+}
+.message {
+    color: #fff;
+    text-shadow: 1px 1px 2px red;
+    padding-left: 50px;
+    font-weight: bold;
+}
+
+html,body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+}

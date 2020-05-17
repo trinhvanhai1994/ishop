@@ -74,6 +74,15 @@ body {
     height: fit-content;
 }
 
+#bg-image-body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('/static/images/body-background.png');
+    border: 1px solid #666;
+    height: 100%;
+    width:100%;
+}
+
 /* Column container */
 .row {
     display: -ms-flexbox; /* IE10 */

@@ -41,7 +41,9 @@ public class User {
     private String name;
 
     @NotEmpty(message = "*Please provide your last name")
-    private String lastName;
+    private String phone;
+
+    private String address;
 
     private Boolean active;
 
