@@ -10,13 +10,12 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-public class Card {
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer userId;
-    private Integer productId;
-    private Double total;
+    private Long userId;
+    private Long productId;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 }

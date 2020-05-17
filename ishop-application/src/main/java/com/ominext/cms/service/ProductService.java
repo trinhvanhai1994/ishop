@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    private ProductRepository repository;
+    private final ProductRepository repository;
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
@@ -23,12 +23,16 @@ public class ProductService {
         repository.save(product);
     }
 
-    public Product get(Long id) throws RecordNotFoundException {
+    public Product getProduct(Long id) throws RecordNotFoundException {
         Optional<Product> product = repository.findFirstById(id);
         if (!product.isPresent()) {
             throw new RecordNotFoundException("No product record exist for given id");
         }
         return product.get();
+    }
+
+    public List<Product> getAllByIds(List<Long> ids) {
+        return repository.findAllByIds(ids);
     }
 
     public List<Product> getAll() {

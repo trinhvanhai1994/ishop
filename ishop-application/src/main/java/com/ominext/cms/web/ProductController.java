@@ -26,6 +26,15 @@ public class ProductController {
         this.userService = userService;
     }
 
+    @GetMapping("/")
+    public ModelAndView homePage() {
+        List<Product> products = service.getAll();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("products", products);
+        modelAndView.setViewName("/home-page");
+        return modelAndView;
+    }
+
     @GetMapping("/redirectProduct")
     public ModelAndView createEmployee() {
         ModelAndView modelAndView = new ModelAndView();
@@ -44,16 +53,20 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
-    public ModelAndView getProduct(@PathVariable Long id) {
+    public ModelAndView getProduct(@PathVariable Long id) throws RecordNotFoundException {
+        Product product = service.getProduct(id);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("product", new Product());
+        modelAndView.addObject("product", product);
+        modelAndView.addObject("user", user);
         modelAndView.setViewName("/product/detail-product");
         return modelAndView;
     }
 
     @PostMapping("/edit-product/{id}")
     public ModelAndView editProduct(@PathVariable Long id) throws RecordNotFoundException {
-        Product product = service.get(id);
+        Product product = service.getProduct(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("product", product);
         modelAndView.setViewName("redirect:/products");

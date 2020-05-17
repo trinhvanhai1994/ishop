@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Employees</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="navbar">
+    <a href="/products">
+        <img src="https://giaxe.2banh.vn/images/logo-2020-giaxe.png" alt="Home"/>
+    </a>
+    <a href="login" class="right">Logout</a>
+</div>
+<div>
+    <img id="bg-image" class="fa-font-awesome-logo-full"
+         src="https://giaidap.com.vn/wp-content/uploads/2018/08/anh-dep-thien-nhien-the-gioi-01.jpg" alt="Background">
+    <div class="background-body">
+        <div th:switch="${cart.products}" class="container my-5">
+            <p th:object="${cart}" class="my-5">
+                <a href="/products" class="btn btn-primary">
+                    <i class="fas fa-user-plus ml-2"> Continue Shopping </i>
+                </a>
+            </p>
+
+            <div class="col-md-10">
+                <h2 th:case="null">No record found !!</h2>
+                <div th:case="*">
+                    <div class="container">
+                        <div th:each="product : ${cart.products}">
+                            <thead>
+                            <div class="group-brand-items">
+                                <span class="title"><strong th:text="${product.name}"></strong></span>
+                                <div class="bike-item-img">
+                                    <img th:src="${'/images/' + product.image}" class="img-rounded" width="500"
+                                         height="300" alt="PickGunny">
+                                </div>
+                                <div class="bike-item-info">
+                                    <span class="alert-success"> Price: <strong th:text="${product.price}"></strong> $</span>
+                                    <span class="border-warning"> Discount: <strong th:text="${product.discount}"></strong> $</span>
+                                </div>
+                                <br>
+                            </div>
+                            </thead>
+                        </div>
+                        <div class="bike-item-info">
+                                <span class="alert-dark">
+                                    <h2> Tổng thiệt hại tạm tính:</h2>
+                                    <strong class="bg-success" th:text="${cart.amount}"></strong> $
+                                </span>
+                            <br>
+                            <span class="alert-dark">
+                                    <h2> Tổng thiệt hại thực tế:</h2>
+                                    <strong class="bg-info" th:text="${cart.amountAfterDiscount}"></strong> $
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer fix-scroll" id="footer">
+    <div class="footer-head clearfix">
+        <div class="container">
+            <div class="box-left">
+                <div class="widget aos-init aos-animate" data-aos="fade-right">
+                    <h4 class="title-widget">Ominext Group Joint Stock Company</h4>
+                    <div class="content-widget">
+                        <div class="address address-vn">
+                            <h6 class="name-company">Headquarters</h6>
+                            <p class="address-current">13F, 789 Office Building, 147 Hoang Quoc Viet, <br>Cau Giay
+                                District, Ha Noi, Viet Nam</p>
+                        </div>
+                        <div class="address address-vn">
+                            <h6 class="name-company">Ho Chi Minh Office</h6>
+                            <p class="address-current">4F, NewPort Building, 677/7 Dien Bien Phu, Ward 25, <br>Binh
+                                Thanh District, Ho Chi Minh, Viet Nam</p>
+                        </div>
+                        <div class="address address-ja">
+                            <h6 class="name-company">Japan Office</h6>
+                            <p class="address-current">Shotoku Building 601, 2-25-6 Taito, Taito-ku, Tokyo<br>110-0016,
+                                Japan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row dislex-reserver">
+                <div class="col-xs-12 col-sm-7">
+                    <p class="txt-footer-left">Copyright © 2019 Ominext Group Joint Stock Company.<span
+                            class="disblock-xs"> All rights reserved.</span></p>
+                </div>
+                <div class="col-xs-12 col-sm-5 footer-right">
+                    <p class="txt-footer-right">
+                        <a class="icon_social" href="https://www.facebook.com/ominextgroupjsc" target="_blank"><i
+                                class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a class="icon_social" href="https://www.linkedin.com/company/ominext-jsc" target="_blank"><i
+                                class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scrolltop rounded-circle" style="display: block;"><i class="icon-arrow-up"></i></div>
+    <script type="text/javascript"
+            data-pagespeed-no-defer="">pagespeed.lazyLoadImages.overrideAttributeFunctions();</script>
+    <script src="https://chat-io.ominext.co/apps/embed.js"></script>
+</footer>
+</body>
+</html>
