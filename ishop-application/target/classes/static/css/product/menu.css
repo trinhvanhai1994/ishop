@@ -187,6 +187,14 @@ background: #0076ad;
 padding: 1.3em;
 }
 
+html,body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+}
+
 @-webkit-keyframes opacity {
 0% { opacity: 0; -webkit-transform: scale(3); transform: scale(3);}
 100% { opacity: 1; -webkit-transform: scale(1); transform: scale(1);}
