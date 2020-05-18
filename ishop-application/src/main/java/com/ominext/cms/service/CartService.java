@@ -10,6 +10,7 @@ import com.ominext.cms.utils.DateUtils;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,17 +51,26 @@ public class CartService {
     }
 
     private CartResponse ProcessCartInfo(List<Product> products, Long userId, Map<Long, Long> quantityProductIds) {
-        double amount = products.stream().mapToDouble(Product::getPrice).sum();
-        double amountAfterDiscount = products.stream()
-                .mapToDouble(product -> product.getPrice() - (product.getPrice()*product.getDiscount()/100)).sum();
+        List<ItemResponse> items = new ArrayList<>();
+        products.forEach(product -> {
+            ItemResponse item = new ItemResponse();
+            item.setName(product.getName());
+            item.setImage(product.getImage());
+            item.setPrice(product.getPrice());
+            item.setDiscount(product.getDiscount());
+            item.setQuantity(Integer.parseInt(quantityProductIds.get(product.getId()).toString()));
+            items.add(item);
+        });
 
-        ItemResponse itemResponse = new ItemResponse();
+        double amountSum = items.stream().mapToDouble(ItemResponse::getPrice).sum();
+        double amountAfterDiscountSum = items.stream()
+                .mapToDouble(item -> item.getPrice() - (item.getPrice()*item.getDiscount()/100)).sum();
 
         CartResponse response = new CartResponse();
         response.setUserId(userId);
-        response.setItems(products);
-        response.setAmountTotal(BigDecimal.valueOf(amount));
-        response.setAmountAfterDiscountTotal(BigDecimal.valueOf(amountAfterDiscount));
+        response.setItems(items);
+        response.setAmountTotal(BigDecimal.valueOf(amountSum));
+        response.setAmountAfterDiscountTotal(BigDecimal.valueOf(amountAfterDiscountSum));
         return response;
     }
 
