@@ -39,18 +39,12 @@
 </nav>
 
 <!--body page-->
-<body class="background-body">
+<body>
 <div>
     <img id="bg-image-body" class="fa-font-awesome-logo-full"
          src="/images/top-background.jpg" alt="Background">
     <div>
         <div th:switch="${cart.products}" class="container my-5">
-            <p th:object="${cart}" class="my-5">
-                <a href="/products" class="btn btn-primary">
-                    <i class="fas fa-user-plus ml-2"> Continue Shopping </i>
-                </a>
-            </p>
-
             <div class="col-md-10">
                 <h2 th:case="null">No record found !!</h2>
                 <div th:case="*">
@@ -66,7 +60,7 @@
                                 <div class="bike-item-info">
                                     <span class="alert-success"> Price: <strong
                                             th:text="${product.price}"></strong> $</span>
-                                    <span class="border-warning"> Discount: <strong
+                                    <span class="alert-danger"> Discount: <strong
                                             th:text="${product.discount}"></strong> $</span>
                                 </div>
                                 <br>
@@ -75,14 +69,21 @@
                         </div>
                         <div class="bike-item-info">
                                 <span class="alert-dark">
-                                    <h2> Tổng thiệt hại tạm tính:</h2>
-                                    <strong class="bg-success" th:text="${cart.amount}"></strong> $
+                                    <h2> Tổng thiệt hại tạm tính: <strong class="btn-success" th:text="${cart.amount}"></strong> $</h2>
+
                                 </span>
                             <br>
                             <span class="alert-dark">
-                                    <h2> Tổng thiệt hại thực tế:</h2>
-                                    <strong class="bg-info" th:text="${cart.amountAfterDiscount}"></strong> $
+                                    <h2> Tổng thiệt hại thực tế: <strong class="btn-success" th:text="${cart.amountAfterDiscount}"></strong> $</h2>
+
                                 </span>
+                        </div>
+                        <div>
+                            <p th:object="${cart}" class="my-5">
+                                <a href="/products" class="btn btn-primary">
+                                    <i class="fas fa-user-plus ml-2"> Continue Shopping </i>
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>

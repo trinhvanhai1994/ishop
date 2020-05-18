@@ -1,23 +1,19 @@
-package com.ominext.cms.model;
+package com.ominext.cms.response;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Timestamp;
 
 @Data
-@Entity
-public class Product {
+public class ItemResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Double price;
+    private Integer quantity;
     private String image;
     private Float discount;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
 }

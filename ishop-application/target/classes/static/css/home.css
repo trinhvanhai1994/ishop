@@ -159,11 +159,12 @@ body {
 }
 
 html,body{
-    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-image: url('/images/backgroud.jpg');
     background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
     background-repeat: no-repeat;
-    height: 100%;
-    font-family: 'Numans', sans-serif;
+    background-color: #464646;
 }
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
