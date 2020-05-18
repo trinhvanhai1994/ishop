@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class CartResponse {
     private Long userId;
-    private List<Product> products;
-    private BigDecimal amount;
-    private BigDecimal amountAfterDiscount;
+    private List<Product> items;
+    private BigDecimal amountTotal;
+    private BigDecimal amountAfterDiscountTotal;
 }

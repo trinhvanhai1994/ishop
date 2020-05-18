@@ -5,11 +5,14 @@ import com.ominext.cms.model.Cart;
 import com.ominext.cms.model.Product;
 import com.ominext.cms.repository.CardRepository;
 import com.ominext.cms.response.CartResponse;
+import com.ominext.cms.response.ItemResponse;
 import com.ominext.cms.utils.DateUtils;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -33,22 +36,31 @@ public class CartService {
         repository.save(cart);
     }
 
-    public CartResponse cartInfo(Long userId) {
-        List<Cart> carts = repository.findAllByUserId(userId);
-        List<Long> productIds = carts.stream().map(Cart::getProductId).collect(Collectors.toList());
-        List<Product> products = productService.getAllByIds(productIds);
-        return ProcessCartInfo(products, userId);
+    public void deleteCartItem(Long userId, Long itemId) {
+
     }
 
-    private CartResponse ProcessCartInfo(List<Product> products, Long userId) {
+    public CartResponse cartInfo(Long userId) {
+        List<Cart> carts = repository.findAllByUserId(userId);
+        Map<Long, Long> quantityProductIds = carts.stream()
+                .collect(Collectors.groupingBy(Cart::getProductId, Collectors.counting()));
+        List<Long> productIds = carts.stream().map(Cart::getProductId).collect(Collectors.toList());
+        List<Product> products = productService.getAllByIds(productIds);
+        return ProcessCartInfo(products, userId, quantityProductIds);
+    }
+
+    private CartResponse ProcessCartInfo(List<Product> products, Long userId, Map<Long, Long> quantityProductIds) {
         double amount = products.stream().mapToDouble(Product::getPrice).sum();
         double amountAfterDiscount = products.stream()
                 .mapToDouble(product -> product.getPrice() - (product.getPrice()*product.getDiscount()/100)).sum();
+
+        ItemResponse itemResponse = new ItemResponse();
+
         CartResponse response = new CartResponse();
         response.setUserId(userId);
-        response.setProducts(products);
-        response.setAmount(BigDecimal.valueOf(amount));
-        response.setAmountAfterDiscount(BigDecimal.valueOf(amountAfterDiscount));
+        response.setItems(products);
+        response.setAmountTotal(BigDecimal.valueOf(amount));
+        response.setAmountAfterDiscountTotal(BigDecimal.valueOf(amountAfterDiscount));
         return response;
     }
 
