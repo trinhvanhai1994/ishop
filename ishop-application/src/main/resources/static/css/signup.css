@@ -61,7 +61,7 @@ input::-webkit-input-placeholder {
 }
 
 html,body{
-    background-image: url('/images/backgroud.jpg');
+    background-image: url('/images/login-background.jpg.jpg');
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
