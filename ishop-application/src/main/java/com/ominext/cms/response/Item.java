@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-public class ItemResponse {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,5 +15,6 @@ public class ItemResponse {
     private Double price;
     private Integer quantity;
     private String image;
+    private Double priceTotal;
     private Float discount;
 }

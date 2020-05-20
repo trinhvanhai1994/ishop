@@ -44,12 +44,12 @@
     <img id="bg-image-body" class="fa-font-awesome-logo-full"
          src="/images/top-background.jpg" alt="Background">
     <div>
-        <div th:switch="${cart.products}" class="container my-5">
+        <div th:switch="${cart.getItems()}" class="container my-5">
             <div class="col-md-10">
                 <h2 th:case="null">No record found !!</h2>
                 <div th:case="*">
                     <div class="container">
-                        <div th:each="product : ${cart.products}">
+                        <div th:each="product : ${cart.getItems()}">
                             <thead>
                             <div class="group-brand-items">
                                 <span class="title"><strong th:text="${product.name}"></strong></span>
@@ -60,8 +60,15 @@
                                 <div class="bike-item-info">
                                     <span class="alert-success"> Price: <strong
                                             th:text="${product.price}"></strong> $</span>
-                                    <span class="alert-danger"> Discount: <strong
+                                    <span class="alert-success"> Discount: <strong
                                             th:text="${product.discount}"></strong> $</span>
+                                    <span class="alert-success"> Quantity: <strong
+                                            th:text="${product.quantity}"></strong></span>
+                                    <span class="alert-success"> Price Total: <strong
+                                            th:text="${product.priceTotal}"></strong></span>
+                                    <span class="alert-danger" >
+                                        <a th:href="${'/delete-item?userId=' + cart.userId + '&productId=' + product.id}">DELETE</a>
+                                    </span>
                                 </div>
                                 <br>
                             </div>
@@ -69,12 +76,12 @@
                         </div>
                         <div class="bike-item-info">
                                 <span class="alert-dark">
-                                    <h2> Tổng thiệt hại tạm tính: <strong class="btn-success" th:text="${cart.amount}"></strong> $</h2>
+                                    <h2> Tổng thiệt hại tạm tính: <strong class="btn-success" th:text="${cart.amountTotal}"></strong> $</h2>
 
                                 </span>
                             <br>
                             <span class="alert-dark">
-                                    <h2> Tổng thiệt hại thực tế: <strong class="btn-success" th:text="${cart.amountAfterDiscount}"></strong> $</h2>
+                                    <h2> Tổng thiệt hại thực tế: <strong class="btn-success" th:text="${cart.amountAfterDiscountTotal}"></strong> $</h2>
 
                                 </span>
                         </div>
